@@ -1,4 +1,3 @@
-import axios from "axios";
 import personService from "./services/persons"
 
 const PersonForm = (props) => {
