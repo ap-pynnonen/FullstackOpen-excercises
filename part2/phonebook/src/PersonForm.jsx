@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const PersonForm = (props) => {
 
     const addPerson = (event) => {
@@ -15,6 +17,9 @@ const PersonForm = (props) => {
           }
         }
        if (Namecheck === false) {
+        axios.post('http://localhost:3001/persons', personObject).then(response => {
+          console.log(response)
+        })
         props.setPersons(props.persons.concat(personObject))
         props.setNewName('')
         props.setNewNumber('')
