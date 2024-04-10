@@ -1,4 +1,5 @@
 import axios from "axios";
+import personService from "./services/persons"
 
 const PersonForm = (props) => {
 
@@ -17,10 +18,10 @@ const PersonForm = (props) => {
           }
         }
        if (Namecheck === false) {
-        axios.post('http://localhost:3001/persons', personObject).then(response => {
-          console.log(response)
+        personService.create(personObject).then(response => {
+          props.setPersons(props.persons.concat(response.data))
         })
-        props.setPersons(props.persons.concat(personObject))
+        
         props.setNewName('')
         props.setNewNumber('')
        }

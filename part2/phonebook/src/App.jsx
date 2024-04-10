@@ -3,6 +3,7 @@ import axios from 'axios'
 import Filter from './Filter'
 import PersonFrom from './PersonForm'
 import Persons from './Persons'
+import personService from "./services/persons"
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -17,7 +18,7 @@ const App = () => {
   const [showFilter, setShowFilter] = useState(false)
 
   useEffect(() => {
-    axios.get('http://localhost:3001/persons').then(response => {
+    personService.getAll('http://localhost:3001/persons').then(response => {
     const newpersons = response.data
     setPersons(newpersons)
   })
