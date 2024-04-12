@@ -22,9 +22,15 @@ const PersonForm = (props) => {
         personService.create(personObject).then(response => {
           props.setPersons(props.persons.concat(response.data))
         })
-        
+
+        props.setErrorMessage(`Added ${props.newName}`)
         props.setNewName('')
         props.setNewNumber('')
+
+        setTimeout(() => {
+          props.setErrorMessage(null)
+        }, 5000)
+
        }
        else {
         if (window.confirm(`${props.newName} is already added to phonebook, replave the old number with a new one?`)) {
@@ -32,8 +38,13 @@ const PersonForm = (props) => {
             console.log(response)
             props.setPersons(props.persons.map(person => person.id !== personID ? person : response.data))
             
+            props.setErrorMessage(`Changed ${props.newName} number`)
             props.setNewName('')
             props.setNewNumber('')
+    
+            setTimeout(() => {
+              props.setErrorMessage(null)
+            }, 5000)
           })
         }
        }
