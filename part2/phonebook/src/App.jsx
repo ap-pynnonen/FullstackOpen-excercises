@@ -17,6 +17,7 @@ const App = () => {
   const [filter, setFilter] = useState('')
   const [showFilter, setShowFilter] = useState(false)
   const [errorMessage, setErrorMessage] = useState(null)
+  const [messageError, setMessageError] = useState(false)
 
   useEffect(() => {
     personService.getAll('http://localhost:3001/persons').then(response => {
@@ -25,25 +26,24 @@ const App = () => {
   })
   }, [])
 
-  const Notification = ({message}) => {
+  const Notification = ({message, messageerror}) => {
     if (message === null) {
       return null
     }
-
-    return (
-      <div className='error'>
-        {message}
-      </div>
-    )
+      return (
+        <div className='error' style={{ color: messageerror ? "red" : "green" }}>
+          {message}
+        </div>
+      )
   }
 
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={errorMessage} />
+      <Notification message={errorMessage} messageerror={messageError} />
       <Filter filter={filter} setFilter={setFilter} setShowFilter={setShowFilter} />
       <h3>Add a new</h3>
-      <PersonFrom newName={newName} setNewName={setNewName} newNumber={newNumber} setNewNumber={setNewNumber} persons={persons} setPersons={setPersons} setErrorMessage={setErrorMessage} />
+      <PersonFrom newName={newName} setNewName={setNewName} newNumber={newNumber} setNewNumber={setNewNumber} persons={persons} setPersons={setPersons} setErrorMessage={setErrorMessage} setMessageError={setMessageError} />
       <h3>Numbers</h3>
       <Persons persons={persons} setPersons={setPersons} showFilter={showFilter} filter={filter} />
     </div>

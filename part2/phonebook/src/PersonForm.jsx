@@ -46,6 +46,19 @@ const PersonForm = (props) => {
               props.setErrorMessage(null)
             }, 5000)
           })
+          .catch(error => {
+            //console.log("inside catch")
+            props.setMessageError(true);
+            props.setErrorMessage(`Information of ${props.newName} has already been removed from server`)
+            props.setNewName('')
+            props.setNewNumber('')
+    
+            setTimeout(() => {
+              props.setMessageError(false);
+              props.setErrorMessage(null)
+            }, 5000)
+
+          })
         }
        }
       
