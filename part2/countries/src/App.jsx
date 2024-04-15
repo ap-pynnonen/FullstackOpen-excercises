@@ -33,6 +33,12 @@ const App = () => {
 
   const ShowCountries = (props) => {
     
+    const ShowCountry = (props) => {
+      //console.log(props)
+      const filtercountry = countries.filter(country => country.name.common.toLowerCase().includes(props.toLowerCase()) === true)
+      setCountries(filtercountry)
+    }
+
     if (!isLoading && props.countries && props.countries.length > 10) {
       return(
         <div>
@@ -44,7 +50,7 @@ const App = () => {
       return(
         <div>
             {props.countries.map(country => 
-              <p key={country.name.common}>{country.name.common}</p>
+              <p key={country.name.common}>{country.name.common} <button onClick={() => ShowCountry(country.name.common)}>show</button></p>
             )}
         </div>
       )
