@@ -45,6 +45,20 @@ app.get('/api/persons', (request, response) => {
     response.status(204).end()
   })
 
+app.use(express.json())
+
+app.post('/api/persons', (request, response) => {
+    const body = request.body
+
+    const person = {
+        id: Math.floor(Math.random() * 100000),
+        name: body.name,
+        number: body.number,
+    }
+    persons = persons.concat(person)
+    response.json(person)
+})
+
 app.get('/info', (request, response) => {
     const personlength = persons.length
     const datenow = new Date()
