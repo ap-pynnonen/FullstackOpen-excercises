@@ -35,7 +35,7 @@ const PersonForm = (props) => {
        else {
         if (window.confirm(`${props.newName} is already added to phonebook, replave the old number with a new one?`)) {
           personService.updateNumber(personID, personObject).then(response => {
-            console.log(response)
+            //console.log(response)
             props.setPersons(props.persons.map(person => person.id !== personID ? person : response.data))
             
             props.setErrorMessage(`Changed ${props.newName} number`)
@@ -47,7 +47,7 @@ const PersonForm = (props) => {
             }, 5000)
           })
           .catch(error => {
-            //console.log("inside catch")
+            //console.log("inside catch ", personID)
             props.setMessageError(true);
             props.setErrorMessage(`Information of ${props.newName} has already been removed from server`)
             props.setNewName('')
